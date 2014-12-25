@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "Stack.h";
+#include "Stack.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
