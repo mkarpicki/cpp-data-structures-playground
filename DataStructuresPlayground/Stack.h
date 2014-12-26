@@ -7,19 +7,19 @@ public:
 	Stack();
 	~Stack();
 
-	void push(StackElement);
-	StackElement pop();
+	void push(StackElement *);
+	StackElement * pop();
 
 private:
 
 	class StackItem {
 	public:
 		StackItem();
-		StackItem(StackElement);
+		StackItem(StackElement *);
 		~StackItem();
 
 		StackItem * previousItem;
-		StackElement value;
+		StackElement * value;
 	};
 
 	StackItem * lastItem;
@@ -36,10 +36,11 @@ Stack<StackElement>::Stack()
 template <class StackElement>
 Stack<StackElement>::~Stack()
 {
+
 }
 
 template <class StackElement>
-void Stack<StackElement>::push(StackElement value)
+void Stack<StackElement>::push(StackElement * value)
 {
 	StackItem * newItem = new StackItem(value);
 
@@ -55,14 +56,14 @@ void Stack<StackElement>::push(StackElement value)
 }
 
 template <class StackElement>
-StackElement Stack<StackElement>::pop()
+StackElement * Stack<StackElement>::pop()
 {
 	if (lastItem == NULL)
 	{
 		return NULL;
 	}
 
-	StackElement value = lastItem->value;
+	StackElement * value = lastItem->value;
 	StackItem * itemToDrop = lastItem;
 
 	lastItem = lastItem->previousItem;
@@ -73,7 +74,7 @@ StackElement Stack<StackElement>::pop()
 }
 
 template <class StackElement>
-Stack<StackElement>::StackItem::StackItem(StackElement val)
+Stack<StackElement>::StackItem::StackItem(StackElement * val)
 {
 	value = val;
 }
@@ -81,6 +82,7 @@ Stack<StackElement>::StackItem::StackItem(StackElement val)
 template <class StackElement>
 Stack<StackElement>::StackItem::~StackItem()
 {
+	
 }
 
 
