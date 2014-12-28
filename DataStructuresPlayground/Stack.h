@@ -12,7 +12,8 @@ public:
 
 private:
 
-	class StackItem {
+	class StackItem 
+	{
 	public:
 		StackItem();
 		StackItem(StackElement *);
@@ -64,11 +65,11 @@ StackElement * Stack<StackElement>::pop()
 	}
 
 	StackElement * value = lastItem->value;
-	StackItem * itemToDrop = lastItem;
+	//StackItem * itemToDrop = lastItem;
 
 	lastItem = lastItem->previousItem;
 
-	delete itemToDrop;
+	//delete itemToDrop;
 
 	return value;
 }

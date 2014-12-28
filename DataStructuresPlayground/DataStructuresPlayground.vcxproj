@@ -79,6 +79,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="SomeItem.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="stdafx.h" />

@@ -6,12 +6,19 @@
 #include "Stack.h"
 
 #include "SomeItem.h"
+#include "Queue.h"
+
+/**************************************** 
+ * Stack 
+*****************************************/
 
 void stackWithIntegers()
 {
 	Stack<int> * stack = new Stack<int>();
 
 	int one = 1, two = 2, three = 3;
+
+	stack->pop();
 
 	stack->push(&one);
 	stack->push(&two);
@@ -27,6 +34,8 @@ void stackWithChars()
 	Stack<char> * stack = new Stack<char>();
 
 	char a = 'a', b = 'b', c = 'c';
+
+	stack->pop();
 
 	stack->push(&a);
 	stack->push(&b);
@@ -44,6 +53,8 @@ void stackWithCustomObjects()
 
 	Stack<SomeItem> * stack = new Stack<SomeItem>();
 
+	stack->pop();
+
 	stack->push(someItem1);
 	stack->push(someItem2);
 	stack->push(someItem3);
@@ -60,10 +71,38 @@ void playWithStack()
 	stackWithCustomObjects();
 }
 
+/****************************************
+ * Queue
+*****************************************/
+
+void queueWithIntegers()
+{
+	Queue<int> * queue = new Queue<int>();
+
+	int a = 101, b = 202, c = 303;
+	int *aa , *bb, *cc;
+
+	queue->pop();
+
+	queue->push(&a);
+	queue->push(&b);
+	queue->push(&c);
+
+	aa = queue->pop();
+	bb = queue->pop();
+	cc = queue->pop();
+}
+
+void playWithQueue()
+{
+	queueWithIntegers();
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 
 	playWithStack();
+	playWithQueue();
 
 	//system("PAUSE");
 
