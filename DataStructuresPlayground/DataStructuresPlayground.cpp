@@ -4,9 +4,10 @@
 #include "stdafx.h"
 #include "windows.h"
 #include "Stack.h"
+#include "Queue.h"
 
 #include "SomeItem.h"
-#include "Queue.h"
+
 
 /**************************************** 
  * Stack 
@@ -80,7 +81,6 @@ void queueWithIntegers()
 	Queue<int> * queue = new Queue<int>();
 
 	int a = 101, b = 202, c = 303;
-	int *aa , *bb, *cc;
 
 	queue->pop();
 
@@ -88,14 +88,52 @@ void queueWithIntegers()
 	queue->push(&b);
 	queue->push(&c);
 
-	aa = queue->pop();
-	bb = queue->pop();
-	cc = queue->pop();
+	queue->pop();
+	queue->pop();
+	queue->pop();
+}
+
+void queueWithChars()
+{
+	Queue<char> * queue = new Queue<char>();
+
+	char a = 'a', b = 'b', c = 'c';
+
+	queue->pop();
+
+	queue->push(&a);
+	queue->push(&b);
+	queue->push(&c);
+
+	queue->pop();
+	queue->pop();
+	queue->pop();
+}
+
+void queueWithCustomObjects()
+{
+	SomeItem * someItem1 = new SomeItem();
+	SomeItem * someItem2 = new SomeItem();
+	SomeItem * someItem3 = new SomeItem();
+
+	Queue<SomeItem> * queue = new Queue<SomeItem>();
+
+	queue->pop();
+
+	queue->push(someItem1);
+	queue->push(someItem2);
+	queue->push(someItem3);
+
+	queue->pop();
+	queue->pop();
+	queue->pop();
 }
 
 void playWithQueue()
 {
 	queueWithIntegers();
+	queueWithChars();
+	queueWithCustomObjects();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
