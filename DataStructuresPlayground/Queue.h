@@ -9,6 +9,7 @@ public:
 
 	void push(QueueElement *);
 	QueueElement * pop();
+	bool isEmpty();
 
 private:
 
@@ -72,6 +73,12 @@ QueueElement * Queue<QueueElement>::pop()
 	firstItem = firstItem->next;
 
 	return element;
+}
+
+template <class QueueElement>
+bool Queue<QueueElement>::isEmpty()
+{
+	return (firstItem == NULL) ? true : false;
 }
 
 template <class QueueElement>

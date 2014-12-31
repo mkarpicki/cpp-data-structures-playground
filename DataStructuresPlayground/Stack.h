@@ -9,6 +9,7 @@ public:
 
 	void push(StackElement *);
 	StackElement * pop();
+	bool isEmpty();
 
 private:
 
@@ -54,6 +55,12 @@ void Stack<StackElement>::push(StackElement * value)
 	lastItem = newItem;
 
 	return;
+}
+
+template <class StackElement>
+bool Stack<StackElement>::isEmpty()
+{
+	return (lastItem == NULL) ? true : false;
 }
 
 template <class StackElement>

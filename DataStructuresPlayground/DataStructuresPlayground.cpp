@@ -18,6 +18,9 @@ void stackWithIntegers()
 	Stack<int> * stack = new Stack<int>();
 
 	int one = 1, two = 2, three = 3;
+	bool isEmpty = false;
+
+	isEmpty = stack->isEmpty();
 
 	stack->pop();
 
@@ -25,9 +28,13 @@ void stackWithIntegers()
 	stack->push(&two);
 	stack->push(&three);
 
+	isEmpty = stack->isEmpty();
+
 	stack->pop();
 	stack->pop();
 	stack->pop();
+
+	isEmpty = stack->isEmpty();
 }
 
 void stackWithChars()
@@ -81,6 +88,9 @@ void queueWithIntegers()
 	Queue<int> * queue = new Queue<int>();
 
 	int a = 101, b = 202, c = 303;
+	bool isEmpty = false;
+
+	isEmpty = queue->isEmpty();
 
 	queue->pop();
 
@@ -88,9 +98,13 @@ void queueWithIntegers()
 	queue->push(&b);
 	queue->push(&c);
 
+	isEmpty = queue->isEmpty();
+
 	queue->pop();
 	queue->pop();
 	queue->pop();
+
+	isEmpty = queue->isEmpty();
 }
 
 void queueWithChars()
