@@ -5,9 +5,10 @@ class Queue
 {
 public:
 	Queue();
+	Queue(int);
 	~Queue();
 
-	void push(QueueElement *);
+	bool push(QueueElement *);
 	QueueElement * pop();
 	bool isEmpty();
 
@@ -25,12 +26,25 @@ private:
 
 	QueueItem * firstItem;
 	QueueItem * lastItem;
+
+	int maxSize;
+	int currentSize;
 };
 
 template <class QueueElement>
 Queue<QueueElement>::Queue()
 {
 	firstItem = NULL;
+	maxSize = 0;
+	currentSize = 0;
+}
+
+template <class QueueElement>
+Queue<QueueElement>::Queue(int sizeDef)
+{
+	firstItem = NULL;
+	maxSize = (sizeDef > 0) ? sizeDef : 0;
+	currentSize = 0;
 }
 
 template <class QueueElement>
@@ -40,8 +54,13 @@ Queue<QueueElement>::~Queue()
 }
 
 template <class QueueElement>
-void Queue<QueueElement>::push(QueueElement * element)
+bool Queue<QueueElement>::push(QueueElement * element)
 {
+	if (maxSize > 0 && currentSize == maxSize)
+	{
+		return false;
+	}
+
 	QueueItem * newItem = new QueueItem();
 
 	newItem->value = element;
@@ -57,6 +76,10 @@ void Queue<QueueElement>::push(QueueElement * element)
 	}
 
 	lastItem = newItem;
+
+	currentSize++;
+
+	return true;
 }
 
 template <class QueueElement>
@@ -71,6 +94,8 @@ QueueElement * Queue<QueueElement>::pop()
 	QueueElement * element = firstItem->value;
 
 	firstItem = firstItem->next;
+
+	currentSize--;
 
 	return element;
 }

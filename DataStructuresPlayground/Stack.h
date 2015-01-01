@@ -5,9 +5,10 @@ class Stack
 {
 public:
 	Stack();
+	Stack(int);
 	~Stack();
 
-	void push(StackElement *);
+	bool push(StackElement *);
 	StackElement * pop();
 	bool isEmpty();
 
@@ -25,7 +26,8 @@ private:
 	};
 
 	StackItem * lastItem;
-
+	int currentSize;
+	int maxSize;
 
 };
 
@@ -33,6 +35,16 @@ template <class StackElement>
 Stack<StackElement>::Stack()
 {
 	lastItem = NULL;
+	currentSize = 0;
+	maxSize = 0;
+}
+
+template <class StackElement>
+Stack<StackElement>::Stack(int sizeDef)
+{
+	lastItem = NULL;
+	currentSize = 0;
+	maxSize = (sizeDef > 0) ? sizeDef : 0;
 }
 
 template <class StackElement>
@@ -42,8 +54,14 @@ Stack<StackElement>::~Stack()
 }
 
 template <class StackElement>
-void Stack<StackElement>::push(StackElement * value)
+bool Stack<StackElement>::push(StackElement * value)
 {
+
+	if (maxSize > 0 && currentSize == maxSize)
+	{
+		return false;
+	}
+
 	StackItem * newItem = new StackItem(value);
 
 
@@ -54,7 +72,9 @@ void Stack<StackElement>::push(StackElement * value)
 
 	lastItem = newItem;
 
-	return;
+	currentSize++;
+
+	return true;
 }
 
 template <class StackElement>
@@ -72,11 +92,10 @@ StackElement * Stack<StackElement>::pop()
 	}
 
 	StackElement * value = lastItem->value;
-	//StackItem * itemToDrop = lastItem;
 
 	lastItem = lastItem->previousItem;
 
-	//delete itemToDrop;
+	currentSize--;
 
 	return value;
 }

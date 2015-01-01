@@ -72,11 +72,29 @@ void stackWithCustomObjects()
 	stack->pop();
 }
 
+void limitedStackWithIntegers()
+{
+	Stack<int> * stack = new Stack<int>(2);
+
+	int a = 123, b = 234, c = 345;
+
+	bool wasPushed = false;
+
+	wasPushed = stack->push(&a);
+	wasPushed = stack->push(&b);
+	wasPushed = stack->push(&c);
+
+	stack->pop();
+	wasPushed = stack->push(&c);
+}
+
 void playWithStack()
 {
 	stackWithIntegers();
 	stackWithChars();
 	stackWithCustomObjects();
+
+	limitedStackWithIntegers();
 }
 
 /****************************************
@@ -143,11 +161,32 @@ void queueWithCustomObjects()
 	queue->pop();
 }
 
+void limitedQueueWithChars()
+{
+	Queue<char> * queue = new Queue<char>(2);
+
+	char a = 'z', b = 'y', c = 'x';
+
+	bool wasPushed = false;
+
+	wasPushed = queue->push(&a);
+	wasPushed = queue->push(&b);
+	wasPushed = queue->push(&c);
+
+	queue->pop();
+
+	wasPushed = queue->push(&c);
+
+}
+
 void playWithQueue()
 {
 	queueWithIntegers();
 	queueWithChars();
 	queueWithCustomObjects();
+
+	limitedQueueWithChars();
+
 }
 
 int _tmain(int argc, _TCHAR* argv[])
