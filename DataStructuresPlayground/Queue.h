@@ -56,27 +56,39 @@ Queue<QueueElement>::~Queue()
 template <class QueueElement>
 bool Queue<QueueElement>::push(QueueElement * element)
 {
+	/* check if there was max size defined (during construction)
+	* if so check if current size is not big enough before adding new item
+	*/
 	if (maxSize > 0 && currentSize == maxSize)
 	{
 		return false;
 	}
 
+	/* create new item with delivered value */
 	QueueItem * newItem = new QueueItem();
 
 	newItem->value = element;
 
+	/* if there was last item already (not empty case)
+	* point it's next value to new item
+	*/
 	if (lastItem != NULL)
 	{
 		lastItem->next = newItem;	
 	}
 
+	/* if queue was empty 
+	* remember new item as fisrt
+	*/
 	if (firstItem == NULL)
 	{
 		firstItem = newItem;
 	}
 
+	/* remember new element as last one */
 	lastItem = newItem;
 
+	/* increment size of queue */
 	currentSize++;
 
 	return true;
@@ -85,18 +97,22 @@ bool Queue<QueueElement>::push(QueueElement * element)
 template <class QueueElement>
 QueueElement * Queue<QueueElement>::pop()
 {
-
+	/* if queue is empty, return */
 	if (firstItem == NULL)
 	{
 		return NULL;
 	}
 
+	/* get value of first item */
 	QueueElement * element = firstItem->value;
 
+	/* remember next one as new first item*/
 	firstItem = firstItem->next;
 
+	/* decrease size */
 	currentSize--;
 
+	/* return value kept in element that was first */
 	return element;
 }
 

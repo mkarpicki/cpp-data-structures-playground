@@ -1,3 +1,7 @@
+/**
+* @readme
+* because of problems with linkers and templating whole implementation is kept in header file instead of having it splitted between definition and implementation
+*/
 #pragma once
 
 template <class StackElement>
@@ -56,22 +60,30 @@ Stack<StackElement>::~Stack()
 template <class StackElement>
 bool Stack<StackElement>::push(StackElement * value)
 {
-
+	/*if max size was defined during construction
+	* check if current size is not big enought to not allow pushing 
+	* new item
+	*/
 	if (maxSize > 0 && currentSize == maxSize)
 	{
 		return false;
 	}
 
+	/* create new item on stack with delivered value */
 	StackItem * newItem = new StackItem(value);
 
-
+	/* if there was already last element (stack not empty
+	* point to it in new item's 'previous' field
+	*/
 	if (lastItem != NULL)
 	{
 		newItem->previousItem = lastItem;
 	}
 
+	/* set new added item to be kept as 'last' */
 	lastItem = newItem;
 
+	/* increate stack size */
 	currentSize++;
 
 	return true;
@@ -80,21 +92,29 @@ bool Stack<StackElement>::push(StackElement * value)
 template <class StackElement>
 bool Stack<StackElement>::isEmpty()
 {
+	/*return boolean depending if last item set already or not */
 	return (lastItem == NULL) ? true : false;
 }
 
 template <class StackElement>
 StackElement * Stack<StackElement>::pop()
 {
+	/* if last item not set (stack empty) return NULL */
 	if (lastItem == NULL)
 	{
 		return NULL;
 	}
 
+	/* get value of last item on stack */
 	StackElement * value = lastItem->value;
 
+	/* set prevoius item (kept in last) as new last item 
+	* if there would be only one element that is poped then it's previous is NULL
+	* so this will be new 'last' one then
+	*/
 	lastItem = lastItem->previousItem;
 
+	/* decrease stack size */
 	currentSize--;
 
 	return value;
