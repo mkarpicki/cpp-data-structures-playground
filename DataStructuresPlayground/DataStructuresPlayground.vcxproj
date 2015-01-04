@@ -143,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="SequenceList.h" />
+    <ClInclude Include="SequenceListInt.h" />
     <ClInclude Include="SomeItem.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="stdafx.h" />
@@ -150,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStructuresPlayground.cpp" />
+    <ClCompile Include="SequenceListInt.cpp" />
     <ClCompile Include="SomeItem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -5,6 +5,7 @@
 #include "windows.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "SequenceListInt.h"
 
 #include "SomeItem.h"
 
@@ -189,11 +190,50 @@ void playWithQueue()
 
 }
 
+
+/****************************************
+* Simple Sequence list based on integers
+*****************************************/
+
+void playWithSequenceListInt()
+{
+	SequenceListInt * list = new SequenceListInt();
+
+	int removed = 0;
+
+	bool isEmpty = false;
+
+	isEmpty = list->isEmpty();
+
+	list->insert(1);
+	list->insert(2);
+	list->insert(0);
+	list->insert(3);
+	list->insert(3);
+
+	isEmpty = list->isEmpty();
+
+	removed = list->remove(3);
+	removed = list->remove(1);
+
+	isEmpty = list->isEmpty();
+
+	removed = list->remove(0);
+	removed = list->remove(0);
+	removed = list->remove(2);
+
+	isEmpty = list->isEmpty();
+
+	removed = list->remove(0);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 
 	playWithStack();
 	playWithQueue();
+
+	playWithSequenceListInt();
 
 	//system("PAUSE");
 
