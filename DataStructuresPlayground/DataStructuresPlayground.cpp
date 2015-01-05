@@ -3,12 +3,21 @@
 
 #include "stdafx.h"
 #include "windows.h"
+
+#include <iostream>
+#include <algorithm>    // std::shuffle
+#include <array>        // std::array
+#include <random>       // std::default_random_engine
+#include <chrono>       // std::chrono::system_clock
+
 #include "Stack.h"
 #include "Queue.h"
 #include "SequenceListInt.h"
+#include "BST.h"
 
 #include "SomeItem.h"
 
+using namespace std;
 
 /**************************************** 
  * Stack 
@@ -227,6 +236,35 @@ void playWithSequenceListInt()
 	removed = list->remove(0);
 }
 
+/****************************************
+* Simple BST implementation 
+*****************************************/
+
+void playWithBST()
+{
+	BST<char> * bst = new BST<char>();
+
+	std::array<int, 10> foo = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	// obtain a time-based seed:
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+	shuffle(foo.begin(), foo.end(), std::default_random_engine(seed));
+
+
+	for (int i = 0; i < foo.size() - 1; i++)
+	{
+		std::cout << foo[i] << "\n";
+
+		char data = foo[i];
+
+		bst->insert(foo[i], &data);
+	}
+
+	return;
+
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 
@@ -234,6 +272,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	playWithQueue();
 
 	playWithSequenceListInt();
+
+	playWithBST();
 
 	//system("PAUSE");
 

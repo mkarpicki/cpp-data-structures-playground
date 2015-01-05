@@ -142,6 +142,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="SequenceList.h" />
     <ClInclude Include="SequenceListInt.h" />
