@@ -15,6 +15,7 @@ public:
 
 	void insert(int, BSTDataClass *);
 	BSTDataClass * remove(int);
+	BSTDataClass * search(int);
 
 private:
 	class Node
@@ -31,7 +32,7 @@ private:
 	};
 
 	Node * head;
-	//Node * search(int, Node *);
+	BSTDataClass * search(int, Node *);
 	void insert(int, BSTDataClass *, Node **);
 };
 
@@ -49,15 +50,25 @@ BST<BSTDataClass>::~BST()
 	*/
 }
 
-/*template <class BSTDataClass>
-BST<BSTDataClass>::search(int key, Node * node)
+template <class BSTDataClass>
+BSTDataClass * BST<BSTDataClass>::search(int key)
+{
+	return search(key, head);
+}
+
+template <class BSTDataClass>
+BSTDataClass * BST<BSTDataClass>::search(int key, Node * node)
 {
 	if (node == NULL)
 	{
 		return NULL;
 	}
 
-	if (key <= node->key)
+	if (key == node->key)
+	{
+		return node->data;
+	}
+	else if (key < node->key)
 	{
 		return search(key, node->left);
 	}
@@ -67,7 +78,7 @@ BST<BSTDataClass>::search(int key, Node * node)
 	}
 
 	return NULL;
-}*/
+}
 
 
 template <class BSTDataClass>
@@ -82,6 +93,10 @@ void BST<BSTDataClass>::insert(int key, BSTDataClass * data, Node ** node)
 	if (*node == NULL)
 	{
 		*node = new Node(key, data);
+		//*node = new Node();
+		//(*node)->key = key;
+		//(*node)->data = data;
+		std::cout << "inser: key: " << key << " data : " << *((*node)->data) << "\n";
 		return;
 	}
 

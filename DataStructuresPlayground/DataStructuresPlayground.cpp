@@ -242,7 +242,8 @@ void playWithSequenceListInt()
 
 void playWithBST()
 {
-	BST<char> * bst = new BST<char>();
+	BST<int> * bst = new BST<int>();
+	int * foundData;
 
 	std::array<int, 10> foo = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
@@ -252,13 +253,32 @@ void playWithBST()
 	shuffle(foo.begin(), foo.end(), std::default_random_engine(seed));
 
 
-	for (int i = 0; i < foo.size() - 1; i++)
+	for (int i = 0; i < foo.size(); i++)
 	{
-		std::cout << foo[i] << "\n";
+		std::cout << "key: " << foo[i] << " :: ";
 
-		char data = foo[i];
+		int data = NULL;
+		data = (foo[i] + 65);
+
+		std::cout << "data :" << data << " memory: " << &data << "\n";
 
 		bst->insert(foo[i], &data);
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		foundData = bst->search(i);
+
+		if (foundData == NULL)
+		{
+			std::cout << "key: " << i << " found : NULL\n";
+		}
+		else
+		{
+			std::cout << "key: " << i << " found : " << *foundData << "\n";
+		}
+
+		
 	}
 
 	return;
@@ -275,7 +295,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	playWithBST();
 
-	//system("PAUSE");
+	system("PAUSE");
 
 	return 0;
 }
