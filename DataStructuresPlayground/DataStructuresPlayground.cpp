@@ -19,67 +19,141 @@
 
 using namespace std;
 
+/****************************************
+ global flag for hidding logs
+ This is lame but for now this is not my
+ main focus.
+ @todo Probably I should create a wrapper "doLog" and have flag inside or overwrite << operator?
+*****************************************/
+bool doLog = true;
+
+
 /**************************************** 
  * Stack 
 *****************************************/
 
 void stackWithIntegers()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** stackWithIntegers ***\n";
+	}
+
 	Stack<int> * stack = new Stack<int>();
 
-	int one = 1, two = 2, three = 3;
 	bool isEmpty = false;
 
-	isEmpty = stack->isEmpty();
+	std::array<int, 10> testArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 	stack->pop();
-
-	stack->push(&one);
-	stack->push(&two);
-	stack->push(&three);
 
 	isEmpty = stack->isEmpty();
 
-	stack->pop();
-	stack->pop();
-	stack->pop();
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		if (doLog == true)
+		{
+			std::cout << "push: " << testArray[i] << "\n";
+		}
+		stack->push(&testArray[i]);
+	}
 
+	isEmpty = stack->isEmpty();
+
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		int * value = stack->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << *value << "\n";
+		}
+	}
+	
 	isEmpty = stack->isEmpty();
 }
 
 void stackWithChars()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** stackWithChars ***\n";
+	}
+
 	Stack<char> * stack = new Stack<char>();
 
-	char a = 'a', b = 'b', c = 'c';
+	bool isEmpty = false;
+
+	std::array<char, 10> testArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
 
 	stack->pop();
 
-	stack->push(&a);
-	stack->push(&b);
-	stack->push(&c);
+	isEmpty = stack->isEmpty();
 
-	stack->pop();
-	stack->pop();
-	stack->pop();
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		if (doLog == true)
+		{
+			std::cout << "push: " << testArray[i] << "\n";
+		}
+		stack->push(&testArray[i]);
+	}
+
+	isEmpty = stack->isEmpty();
+
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		char * value = stack->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << *value << "\n";
+		}
+	}
+
+	isEmpty = stack->isEmpty();
 }
+
 void stackWithCustomObjects()
 {
-	SomeItem * someItem1 = new SomeItem();
-	SomeItem * someItem2 = new SomeItem();
-	SomeItem * someItem3 = new SomeItem();
+	if (doLog == true)
+	{
+		std::cout << "*** stackWithCustomObjects ***\n";
+	}
 
 	Stack<SomeItem> * stack = new Stack<SomeItem>();
 
-	stack->pop();
-
-	stack->push(someItem1);
-	stack->push(someItem2);
-	stack->push(someItem3);
+	bool isEmpty = false;
 
 	stack->pop();
-	stack->pop();
-	stack->pop();
+
+	isEmpty = stack->isEmpty();
+
+	for (int i = 0; i < 10; i++)
+	{
+		SomeItem * someItem = new SomeItem(i);
+
+		if (doLog == true)
+		{
+			std::cout << "push: " << someItem->someInt << ", " << someItem->someChar << "\n";
+		}
+
+		stack->push(someItem);
+	}
+
+	isEmpty = stack->isEmpty();
+
+	for (int i = 0; i < 10; i++)
+	{
+		SomeItem * someItem = stack->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << someItem->someInt << ", " << someItem->someChar << "\n";
+		}
+	}
+
+	isEmpty = stack->isEmpty();
 }
 
 void limitedStackWithIntegers()
@@ -113,66 +187,134 @@ void playWithStack()
 
 void queueWithIntegers()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** queueWithIntegers ***\n";
+	}
+
 	Queue<int> * queue = new Queue<int>();
 
-	int a = 101, b = 202, c = 303;
 	bool isEmpty = false;
 
-	isEmpty = queue->isEmpty();
+	std::array<int, 10> testArray = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 	queue->pop();
-
-	queue->push(&a);
-	queue->push(&b);
-	queue->push(&c);
 
 	isEmpty = queue->isEmpty();
 
-	queue->pop();
-	queue->pop();
-	queue->pop();
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		if (doLog == true)
+		{
+			std::cout << "push: " << testArray[i] << "\n";
+		}
+		queue->push(&testArray[i]);
+	}
+
+	isEmpty = queue->isEmpty();
+
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		int * value = queue->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << *value << "\n";
+		}
+	}
 
 	isEmpty = queue->isEmpty();
 }
 
 void queueWithChars()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** queueWithChars ***\n";
+	}
+
 	Queue<char> * queue = new Queue<char>();
 
-	char a = 'a', b = 'b', c = 'c';
+	bool isEmpty = false;
+
+	std::array<char, 10> testArray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
 
 	queue->pop();
 
-	queue->push(&a);
-	queue->push(&b);
-	queue->push(&c);
+	isEmpty = queue->isEmpty();
 
-	queue->pop();
-	queue->pop();
-	queue->pop();
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		if (doLog == true)
+		{
+			std::cout << "push: " << testArray[i] << "\n";
+		}
+		queue->push(&testArray[i]);
+	}
+
+	isEmpty = queue->isEmpty();
+
+	for (int i = 0; i < testArray.size(); i++)
+	{
+		char * value = queue->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << *value << "\n";
+		}
+	}
+
+	isEmpty = queue->isEmpty();
 }
 
 void queueWithCustomObjects()
 {
-	SomeItem * someItem1 = new SomeItem();
-	SomeItem * someItem2 = new SomeItem();
-	SomeItem * someItem3 = new SomeItem();
+	if (doLog == true)
+	{
+		std::cout << "*** queueWithCustomObjects ***\n";
+	}
 
 	Queue<SomeItem> * queue = new Queue<SomeItem>();
 
-	queue->pop();
-
-	queue->push(someItem1);
-	queue->push(someItem2);
-	queue->push(someItem3);
+	bool isEmpty = false;
 
 	queue->pop();
-	queue->pop();
-	queue->pop();
+
+	isEmpty = queue->isEmpty();
+
+	for (int i = 0; i < 10; i++)
+	{
+		SomeItem * someItem = new SomeItem(i);
+
+		if (doLog == true)
+		{
+			std::cout << "push: " << someItem->someInt << ", " << someItem->someChar << "\n";
+		}
+		queue->push(someItem);
+	}
+
+	isEmpty = queue->isEmpty();
+
+	for (int i = 0; i < 10; i++)
+	{
+		SomeItem * someItem = queue->pop();
+
+		if (doLog == true)
+		{
+			std::cout << "pop: " << someItem->someInt << ", " << someItem->someChar << "\n";
+		}
+	}
+
+	isEmpty = queue->isEmpty();
 }
 
 void limitedQueueWithChars()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** limitedQueueWithChars ***\n";
+	}
+
 	Queue<char> * queue = new Queue<char>(2);
 
 	char a = 'z', b = 'y', c = 'x';
@@ -206,6 +348,11 @@ void playWithQueue()
 
 void playWithSequenceListInt()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** playWithSequenceListInt ***\n";
+	}
+
 	SequenceListInt * list = new SequenceListInt();
 
 	int removed = 0;
@@ -242,6 +389,11 @@ void playWithSequenceListInt()
 
 void playWithBST()
 {
+	if (doLog == true)
+	{
+		std::cout << "*** playWithBST ***\n";
+	}
+
 	BST<int> * bst = new BST<int>();
 	int * foundData;
 
@@ -255,30 +407,32 @@ void playWithBST()
 
 	for (int i = 0; i < foo.size(); i++)
 	{
-		std::cout << "key: " << foo[i] << " :: ";
-
 		int data = NULL;
 		data = (foo[i] + 65);
 
-		std::cout << "data :" << data << " memory: " << &data << "\n";
+		if (doLog == true)
+		{
+			std::cout << "insert key: " << foo[i] << " :: " << "data :" << data << "\n";
+		}
 
 		bst->insert(foo[i], &data);
 	}
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < foo.size() + 1; i++)
 	{
 		foundData = bst->search(i);
 
-		if (foundData == NULL)
+		if (doLog == true)
 		{
-			std::cout << "key: " << i << " found : NULL\n";
+			if (foundData == NULL)
+			{
+				std::cout << "key: " << i << " found : NULL\n";
+			}
+			else
+			{
+				std::cout << "key: " << i << " found : " << *foundData << "\n";
+			}
 		}
-		else
-		{
-			std::cout << "key: " << i << " found : " << *foundData << "\n";
-		}
-
-		
 	}
 
 	return;

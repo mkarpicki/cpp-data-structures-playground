@@ -60,9 +60,10 @@ Stack<StackElement>::~Stack()
 template <class StackElement>
 bool Stack<StackElement>::push(StackElement * value)
 {
-	/*if max size was defined during construction
-	* check if current size is not big enought to not allow pushing 
-	* new item
+	/*
+	if max size was defined during construction
+	check if current size is not big enought to not allow pushing 
+	new item
 	*/
 	if (maxSize > 0 && currentSize == maxSize)
 	{
@@ -72,8 +73,9 @@ bool Stack<StackElement>::push(StackElement * value)
 	/* create new item on stack with delivered value */
 	StackItem * newItem = new StackItem(value);
 
-	/* if there was already last element (stack not empty
-	* point to it in new item's 'previous' field
+	/* 
+	if there was already last element (stack not empty
+	point to it in new item's 'previous' field
 	*/
 	if (lastItem != NULL)
 	{
@@ -106,11 +108,16 @@ StackElement * Stack<StackElement>::pop()
 	}
 
 	/* get value of last item on stack */
-	StackElement * value = lastItem->value;
+	StackElement * value = new StackElement();
+	*value = *(lastItem->value);
 
-	/* set prevoius item (kept in last) as new last item 
-	* if there would be only one element that is poped then it's previous is NULL
-	* so this will be new 'last' one then
+	//release memory
+	delete lastItem->value;
+
+	/* 
+	set prevoius item (kept in last) as new last item 
+	if there would be only one element that is poped then it's previous is NULL
+	so this will be new 'last' one then
 	*/
 	lastItem = lastItem->previousItem;
 
@@ -121,15 +128,16 @@ StackElement * Stack<StackElement>::pop()
 }
 
 template <class StackElement>
-Stack<StackElement>::StackItem::StackItem(StackElement * val)
+Stack<StackElement>::StackItem::StackItem(StackElement * element)
 {
-	value = val;
+	value = new StackElement();
+	*value = *element;
 }
 
 template <class StackElement>
 Stack<StackElement>::StackItem::~StackItem()
 {
-	
+	delete value;
 }
 
 

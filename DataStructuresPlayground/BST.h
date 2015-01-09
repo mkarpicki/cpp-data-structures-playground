@@ -2,7 +2,7 @@
 * Example of Binary Search Tree
 * Currently implemented for integers only
 * 
-* @todo - consider adding support for samy key
+* @todo - consider adding support for samy key?
 *****************************************/
 #pragma once
 
@@ -16,6 +16,7 @@ public:
 	void insert(int, BSTDataClass *);
 	BSTDataClass * remove(int);
 	BSTDataClass * search(int);
+	bool isEmpty();
 
 private:
 	class Node
@@ -48,6 +49,12 @@ BST<BSTDataClass>::~BST()
 	/*
 	* @todo - go thru whole tree and release memory
 	*/
+}
+
+template <class BSTDataClass>
+bool BST<BSTDataClass>::isEmpty()
+{
+	return (head == NULL) ? true : false;
 }
 
 template <class BSTDataClass>
@@ -93,14 +100,8 @@ void BST<BSTDataClass>::insert(int key, BSTDataClass * data, Node ** node)
 	if (*node == NULL)
 	{
 		*node = new Node(key, data);
-		//*node = new Node();
-		//(*node)->key = key;
-		//(*node)->data = data;
-		std::cout << "inser: key: " << key << " data : " << *((*node)->data) << "\n";
 		return;
 	}
-
-	Node * child;
 
 	if ((*node)->key > key)
 	{
@@ -130,7 +131,10 @@ BST<BSTDataClass>::Node::Node(int key, BSTDataClass * data)
 	right = NULL;
 
 	this->key = key;
-	this->data = data;
+	
+	this->data = new BSTDataClass();
+	*(this->data) = *data;
+
 }
 
 template <class BSTDataClass>
@@ -140,5 +144,5 @@ BST<BSTDataClass>::Node::~Node()
 	right = NULL;
 
 	key = NULL;
-	data = NULL;
+	delete data;
 }

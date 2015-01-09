@@ -18,6 +18,7 @@ private:
 	{
 	public:
 		QueueItem();
+		QueueItem(QueueElement *);
 		~QueueItem();
 
 		QueueElement * value;
@@ -65,9 +66,7 @@ bool Queue<QueueElement>::push(QueueElement * element)
 	}
 
 	/* create new item with delivered value */
-	QueueItem * newItem = new QueueItem();
-
-	newItem->value = element;
+	QueueItem * newItem = new QueueItem(element);
 
 	/* if there was last item already (not empty case)
 	* point it's next value to new item
@@ -104,10 +103,15 @@ QueueElement * Queue<QueueElement>::pop()
 	}
 
 	/* get value of first item */
-	QueueElement * element = firstItem->value;
+	QueueElement * element = new QueueElement(); 
+	*element = *(firstItem->value);
+
+	QueueItem * next = firstItem->next;
+
+	delete firstItem;
 
 	/* remember next one as new first item*/
-	firstItem = firstItem->next;
+	firstItem = next;
 
 	/* decrease size */
 	currentSize--;
@@ -129,7 +133,15 @@ Queue<QueueElement>::QueueItem::QueueItem()
 }
 
 template <class QueueElement>
+Queue<QueueElement>::QueueItem::QueueItem(QueueElement * element)
+{
+	value = new QueueElement();
+	*value = *element;
+}
+
+
+template <class QueueElement>
 Queue<QueueElement>::QueueItem::~QueueItem()
 {
-
+	delete value;
 }
