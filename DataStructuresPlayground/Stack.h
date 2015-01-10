@@ -54,7 +54,10 @@ Stack<StackElement>::Stack(int sizeDef)
 template <class StackElement>
 Stack<StackElement>::~Stack()
 {
-
+	while (!isEmpty())
+	{
+		pop();
+	}
 }
 
 template <class StackElement>
