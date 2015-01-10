@@ -71,6 +71,7 @@ void stackWithIntegers()
 	}
 	
 	isEmpty = stack->isEmpty();
+
 }
 
 void stackWithChars()
@@ -395,6 +396,7 @@ void playWithBST()
 	}
 
 	BST<int> * bst = new BST<int>();
+	
 	int * foundData;
 
 	std::array<int, 10> foo = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -410,12 +412,12 @@ void playWithBST()
 		int data = NULL;
 		data = (foo[i] + 65);
 
+		bst->insert(foo[i], &data);
+
 		if (doLog == true)
 		{
-			std::cout << "insert key: " << foo[i] << " :: " << "data :" << data << "\n";
+			std::cout << "insert key: " << foo[i] << " :: " << "data :" << data << " steps to find node: " << bst->countLastInsertSteps() << "\n";
 		}
-
-		bst->insert(foo[i], &data);
 	}
 
 	for (int i = 0; i < foo.size() + 1; i++)
@@ -430,7 +432,7 @@ void playWithBST()
 			}
 			else
 			{
-				std::cout << "key: " << i << " found : " << *foundData << "\n";
+				std::cout << "key: " << i << " found : " << *foundData << " in " << bst->countLastSearchSteps() << " step(s)" << "\n";
 			}
 		}
 	}

@@ -18,6 +18,9 @@ public:
 	BSTDataClass * search(int);
 	bool isEmpty();
 
+	int countLastSearchSteps();
+	int countLastInsertSteps();
+
 private:
 	class Node
 	{
@@ -33,6 +36,9 @@ private:
 	};
 
 	Node * head;
+	int lastSearchStepsNumber;
+	int lastInsertStepsNumber;
+
 	BSTDataClass * search(int, Node *);
 	void insert(int, BSTDataClass *, Node **);
 };
@@ -41,6 +47,8 @@ template <class BSTDataClass>
 BST<BSTDataClass>::BST()
 {
 	head = NULL;
+	lastSearchStepsNumber = 0;
+	lastInsertStepsNumber = 0;
 }
 
 template <class BSTDataClass>
@@ -60,6 +68,8 @@ bool BST<BSTDataClass>::isEmpty()
 template <class BSTDataClass>
 BSTDataClass * BST<BSTDataClass>::search(int key)
 {
+	lastSearchStepsNumber = 0;
+
 	return search(key, head);
 }
 
@@ -70,6 +80,8 @@ BSTDataClass * BST<BSTDataClass>::search(int key, Node * node)
 	{
 		return NULL;
 	}
+
+	lastSearchStepsNumber++;
 
 	if (key == node->key)
 	{
@@ -91,12 +103,15 @@ BSTDataClass * BST<BSTDataClass>::search(int key, Node * node)
 template <class BSTDataClass>
 void BST<BSTDataClass>::insert(int key, BSTDataClass * data)
 {
+	lastInsertStepsNumber = 0;
 	insert(key, data, &head);
 }
 
 template <class BSTDataClass>
 void BST<BSTDataClass>::insert(int key, BSTDataClass * data, Node ** node)
 {
+	lastInsertStepsNumber++;
+
 	if (*node == NULL)
 	{
 		*node = new Node(key, data);
@@ -114,6 +129,18 @@ void BST<BSTDataClass>::insert(int key, BSTDataClass * data, Node ** node)
 
 	return;
 
+}
+
+template <class BSTDataClass>
+int BST<BSTDataClass>::countLastSearchSteps()
+{
+	return lastSearchStepsNumber;
+}
+
+template <class BSTDataClass>
+int BST<BSTDataClass>::countLastInsertSteps()
+{
+	return lastInsertStepsNumber;
 }
 
 template <class BSTDataClass>
