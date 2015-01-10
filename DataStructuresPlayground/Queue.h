@@ -51,7 +51,10 @@ Queue<QueueElement>::Queue(int sizeDef)
 template <class QueueElement>
 Queue<QueueElement>::~Queue()
 {
-
+	while (!isEmpty())
+	{
+		pop();
+	}
 }
 
 template <class QueueElement>
